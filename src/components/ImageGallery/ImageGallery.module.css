@@ -1,0 +1,13 @@
+.imgList {
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.imgItem {
+  list-style: none;
+  flex-basis: calc((100% - 30px) / 3);
+  cursor: pointer;
+}

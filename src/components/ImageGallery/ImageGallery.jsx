@@ -1,11 +1,21 @@
 import ImageCard from "../ImageCard/ImageCard";
+import css from "./ImageGallery.module.css";
 
-const ImageGallery = () => {
+const ImageGallery = ({ images, openModal }) => {
   return (
-    <ul>
-      <li>
-        <ImageCard />
-      </li>
+    <ul className={css.imgList}>
+      {images.map(({ id, description, urls: { small, regular } }) => {
+        return (
+          <li key={id} className={css.imgItem}>
+            <ImageCard
+              small={small}
+              regular={regular}
+              description={description}
+              openModal={openModal}
+            />
+          </li>
+        );
+      })}
     </ul>
   );
 };

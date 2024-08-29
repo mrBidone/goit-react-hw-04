@@ -1,8 +1,13 @@
-const ImageCard = () => {
+import css from "./ImageCard.module.css";
+
+const ImageCard = ({ description, small, regular, openModal }) => {
   return (
-    <div>
-      <img src="" alt="" />
-    </div>
+    <img
+      className={css.img}
+      src={small}
+      alt={description}
+      onClick={() => openModal(regular, description)}
+    />
   );
 };
 
