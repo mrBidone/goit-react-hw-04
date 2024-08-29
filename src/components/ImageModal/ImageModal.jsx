@@ -1,5 +1,9 @@
 const ImageModal = () => {
-  return;
+  return (
+    <div>
+      <img src="" alt="" />
+    </div>
+  );
 };
 
 export default ImageModal;
