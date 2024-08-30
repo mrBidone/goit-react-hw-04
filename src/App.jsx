@@ -19,6 +19,8 @@ const App = () => {
 
   const handleSubmit = (searchQuery) => {
     setSearchQuery(searchQuery);
+    setPage(1);
+    setImages([]);
   };
 
   useEffect(() => {
@@ -30,13 +32,13 @@ const App = () => {
         setIsLoading(true);
         const { results, total_pages } = await getImages(searchQuery, page);
         if (results.length === 0 && page === 1) {
-          setNoResults(true); // Если нет результатов, устанавливаем состояние
+          setNoResults(true);
         } else {
           setImages((prevImages) =>
             page === 1 ? results : [...prevImages, ...results]
           );
           setPagination(page < total_pages);
-          setNoResults(false); // Сбрасываем, если есть результаты
+          setNoResults(false);
         }
       } catch (err) {
         setError(err.message);
@@ -53,11 +55,11 @@ const App = () => {
   };
 
   const openModal = (url, alt) => {
-    setModal({ ...modal, isOpen: true, imgUrl: url, imgAlt: alt });
+    setModal({ ...modal, isOpen: true, imgUrl: url, imgAlt: alt || "Image" });
   };
 
   const closeModal = () => {
-    setModal({ ...modal, isOpen: false, imgUrl: "", imgAlt: "" && "noAlt" });
+    setModal({ ...modal, isOpen: false, imgUrl: "", imgAlt: "Image" });
   };
 
   return (
@@ -70,7 +72,7 @@ const App = () => {
           </p>
         )}
         {error !== null && <ErrorMessage error={error} />}
-        {getImages.length > 0 && (
+        {images.length > 0 && (
           <ImageGallery images={images} openModal={openModal} />
         )}
         {pagination && <LoadMoreBtn onClick={handleLoadMore} />}
